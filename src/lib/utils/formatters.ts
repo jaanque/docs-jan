@@ -11,8 +11,8 @@
  */
 export function formatNumber(num: number): string {
   // We use Intl.NumberFormat with compact notation for robust, internationalized shorthand.
-  // We then lowercase the result (e.g., "K" -> "k") to match our premium design aesthetic.
-  return new Intl.NumberFormat('en-US', {
+  // Passing 'undefined' allows the API to use the user's system locale for global scalability.
+  return new Intl.NumberFormat(undefined, {
     notation: 'compact',
     maximumFractionDigits: 1
   }).format(num).toLowerCase();

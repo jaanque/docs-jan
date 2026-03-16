@@ -21,7 +21,13 @@
     <div class="flex items-center gap-6">
       <div class="w-20 h-20 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center text-sm font-black text-slate-500 shadow-sm transition-premium overflow-hidden shrink-0">
         {#if project.logo}
-          <img src={project.logo} alt="{project.name} logo" class="w-full h-full object-contain p-1.5" />
+          <img 
+            src={project.logo} 
+            alt="{project.name} logo" 
+            class="w-full h-full object-contain p-1.5"
+            loading="lazy"
+            decoding="async"
+          />
         {:else}
           <span aria-label="Logo for {project.name}">{project.id}</span>
         {/if}
