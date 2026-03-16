@@ -9,7 +9,7 @@
 </script>
 
 <svelte:head>
-  <title>CoDoc | Refined Engineering</title>
+  <title>codocs | Refined Engineering</title>
   <meta name="description" content="Instant engineering documentation browser." />
   <link rel="icon" href={favicon} />
 </svelte:head>

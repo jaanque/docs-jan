@@ -9,6 +9,7 @@
   /*                                   IMPORTS                                  */
   /* -------------------------------------------------------------------------- */
   import { sidebarNav } from '$lib/mockData/navigation';
+  import { base } from '$app/paths';
   
   /* -------------------------------------------------------------------------- */
   /*                                    PROPS                                   */
@@ -47,16 +48,23 @@
   class:w-20={isCollapsed}
 >
   <!-- [SECTION] Logo Area -->
-  <div class="h-16 flex items-center px-5 shrink-0 transition-premium">
-    <div class="w-9 h-9 bg-slate-900 rounded-xl flex items-center justify-center text-white font-bold text-xs shrink-0 shadow-lg shadow-slate-900/10">CD</div>
-    <div 
-      class="ml-3 flex flex-col transition-opacity duration-300"
-      class:opacity-0={isCollapsed} 
-      class:hidden={isCollapsed}
-    >
-      <span class="font-bold text-sm tracking-tight text-slate-900">CoDoc</span>
-      <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Engineering</span>
-    </div>
+  <div class="h-16 flex items-center px-5 shrink-0">
+    <a href={base || '/'} class="group flex items-center gap-3 outline-none no-underline">
+      <div class="flex items-center justify-center shrink-0">
+        <div 
+          class="w-10 h-10 eng-logo-mask group-hover:bg-brand-accent group-hover:scale-110" 
+          style="mask-image: url('/cocodrilo.svg'); -webkit-mask-image: url('/cocodrilo.svg');"
+          aria-label="codocs logo"
+        ></div>
+      </div>
+      <span 
+        class="font-black text-[22px] tracking-tighter text-slate-900 leading-none transition-premium group-hover:text-brand-accent"
+        class:opacity-0={isCollapsed} 
+        class:hidden={isCollapsed}
+      >
+        codocs
+      </span>
+    </a>
   </div>
 
   <!-- [SECTION] Scrollable Navigation -->

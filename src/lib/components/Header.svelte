@@ -18,16 +18,19 @@
 <header class="h-16 flex items-center px-6 shrink-0 bg-slate-100 z-10 transition-premium">
   
   <!-- [SECTION] Left: Navigation / Breadcrumbs -->
-  <div class="flex items-center gap-4 w-1/4">
-    <div class="flex items-center gap-2 text-[13px] font-semibold text-slate-500">
-      {#each headerNav.breadcrumbs as crumb, i (crumb.label)}
-        <span class="hover:text-brand-primary cursor-pointer transition-colors" class:text-brand-primary={crumb.active}>{crumb.label}</span>
-        {#if i < headerNav.breadcrumbs.length - 1}
-          <svg class="w-3 h-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        {/if}
-      {/each}
+  <div class="flex-1 flex items-center gap-4">
+    <div class="flex items-center gap-3 text-[13px] font-semibold text-slate-500">
+
+      <div class="flex items-center gap-2">
+        {#each headerNav.breadcrumbs as crumb, i (crumb.label)}
+          <span class="hover:text-brand-primary cursor-pointer transition-colors" class:text-brand-primary={crumb.active}>{crumb.label}</span>
+          {#if i < headerNav.breadcrumbs.length - 1}
+            <svg class="w-3 h-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+            </svg>
+          {/if}
+        {/each}
+      </div>
     </div>
   </div>
 
@@ -53,38 +56,27 @@
   </div>
   
   <!-- [SECTION] Right: Action & Profile Group -->
-  <!-- We use w-1/4 to balance the breadcrumbs on the left, centering the search. -->
-  <div class="w-1/4 flex items-center justify-end gap-5">
-    <button class="eng-btn-primary h-9" aria-label="Create New Project">
+  <div class="flex-1 flex items-center justify-end">
+    <!-- Decorative Separator 1 -->
+    <div class="h-6 w-[1.5px] bg-slate-300/80 mx-8"></div>
+
+    <button class="eng-btn-primary h-9 px-5 shrink-0" aria-label="Create New Project">
       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
       </svg>
       New Project
     </button>
 
-    <div class="flex items-center gap-3 border-l border-slate-200/60 pl-5">
-      <button 
-        class="relative p-2 text-slate-400 hover:text-brand-primary hover:bg-slate-200/50 rounded-lg transition-premium group" 
-        title="Notifications"
-        aria-label="View Notifications"
-      >
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-        </svg>
-        <span class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-slate-100"></span>
+    <!-- Decorative Separator 2 (Symmetric) -->
+    <div class="h-6 w-[1.5px] bg-slate-300/80 mx-8"></div>
+
+    <div class="flex items-center gap-6 shrink-0 pr-2">
+      <button class="text-[13px] font-bold text-slate-500 hover:text-brand-primary transition-colors whitespace-nowrap" aria-label="Iniciar sesión">
+        Iniciar sesión
       </button>
-      
-      <div 
-        class="flex items-center gap-2 cursor-pointer group p-1 pr-3 hover:bg-slate-200/50 rounded-full transition-premium"
-        role="button"
-        tabindex="0"
-        aria-label="User Profile Menu"
-      >
-        <div class="w-8 h-8 rounded-full bg-slate-900 flex items-center justify-center text-white font-bold text-xs shadow-xl shadow-slate-900/10 group-hover:scale-105 transition-transform">JU</div>
-        <svg class="w-3 h-3 text-slate-400 group-hover:text-slate-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
-      </div>
+      <button class="eng-btn-primary h-9 px-6 whitespace-nowrap" aria-label="Crear cuenta">
+        Crear cuenta
+      </button>
     </div>
   </div>
 </header>

@@ -34,6 +34,9 @@
   body {
     @apply min-h-screen bg-white font-sans font-normal text-brand-primary antialiased;
   }
+  button {
+    @apply cursor-pointer;
+  }
 }
 
 @layer utilities {
@@ -73,11 +76,11 @@
   }
 
   .eng-btn-primary {
-    @apply flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white shadow-sm transition-premium hover:bg-brand-accent-hover active:scale-[0.97];
+    @apply flex cursor-pointer items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-semibold text-white shadow-sm transition-premium hover:bg-brand-accent-hover active:scale-[0.97];
   }
-
+  
   .eng-btn-secondary {
-    @apply flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm transition-premium hover:border-slate-300 hover:bg-slate-50 active:scale-[0.97];
+    @apply flex cursor-pointer items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-600 shadow-sm transition-premium hover:border-slate-300 hover:bg-slate-50 active:scale-[0.97];
   }
 
   .eng-search-center-container {
@@ -98,11 +101,11 @@
   }
 
   .eng-card {
-    @apply relative flex cursor-pointer flex-col overflow-hidden rounded-2xl bg-white p-5 border border-slate-100 transition-premium;
+    @apply relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white p-5 transition-premium;
   }
 
   .eng-card:hover {
-    @apply border-slate-200 bg-slate-50/30;
+    @apply border-brand-accent/20 bg-brand-accent/3;
   }
 
   /* Removed Layered Gradient Elements for Pure Solid Look */
@@ -170,5 +173,11 @@
   }
   .eng-card:hover .card-icon-bounce {
     @apply scale-100; /* Removed scale bounce as per user request */
+  }
+  .eng-logo-mask {
+    mask-size: contain;
+    mask-repeat: no-repeat;
+    mask-position: center;
+    @apply bg-slate-900 transition-premium;
   }
 }
