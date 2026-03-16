@@ -63,9 +63,12 @@
          <span class="text-[11px] font-bold text-slate-500">{project.lang}</span>
        </div>
        <div class="w-px h-3 bg-slate-200" aria-hidden="true" role="separator"></div>
-       <div class="eng-badge-status" class:synced={project.status === 'synced'} class:syncing={project.status === 'syncing'} aria-label="Last sync status: {project.time}">
-         <span class="dot" aria-hidden="true"></span>
-         {project.time}
+       <div class="eng-badge-status" class:synced={project.status === 'synced'} class:syncing={project.status === 'syncing'}>
+         <span class="sr-only">Last sync status: {project.time}</span>
+         <span class="flex items-center gap-1.5" aria-hidden="true">
+           <span class="dot"></span>
+           {project.time}
+         </span>
        </div>
     </div>
   </div>

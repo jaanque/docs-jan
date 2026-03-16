@@ -31,6 +31,11 @@
     @apply bg-white/70 backdrop-blur-md border border-white/20;
   }
 
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+
   .eng-sidebar-item {
     @apply relative flex items-center w-full gap-3 px-5 py-2.5 text-[13px] font-semibold transition-premium cursor-pointer select-none border-none outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/30;
     color: #64748b; /* Slate 500 */
