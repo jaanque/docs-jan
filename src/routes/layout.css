@@ -1,92 +1,114 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-primary: #333238;
-  --color-brand-active: #48474d;
-  --color-brand-border: #dbdbdb;
-  --color-brand-bg: #ffffff;
-  --color-brand-accent: #2d5a27; /* Deep Crocodile Green */
-  --color-brand-accent-light: #e9f5e8;
-  --color-brand-accent-hover: #3d7a35;
-  --color-brand-success: #108548;
+  --color-brand-primary: #0f172a; /* Slate 900 */
+  --color-brand-active: #f1f5f9;
+  --color-brand-border: #e2e8f0;
+  --color-brand-bg: #f8fafc;
+  --color-brand-ui: #f1f5f9;
+  --color-brand-accent: #0d9488; /* Vibrant Teal */
+  --color-brand-accent-light: #f0fdfa;
+  --color-brand-accent-hover: #0f766e;
+  --color-brand-success: #10b981;
   
-  --font-sans: "Inter", "Segoe UI", Roboto, sans-serif;
-  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* Premium Transitions */
+  --transition-premium: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @layer base {
   body {
-    @apply font-sans text-brand-primary antialiased min-h-screen transition-colors duration-300;
-    background-color: #ebebef; 
+    @apply font-sans text-brand-primary antialiased min-h-screen bg-white font-normal;
   }
 }
 
 @layer utilities {
-  .gitlab-border {
-    border: 1px solid var(--color-brand-border);
+  .glass-panel {
+    @apply bg-white/70 backdrop-blur-md border border-white/20;
   }
 
-  .gitlab-sidebar-item {
-    @apply flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-all duration-200 cursor-pointer select-none rounded-lg mx-2;
-    color: #6a6a6a;
+  .eng-sidebar-item {
+    @apply relative flex items-center gap-3 px-3 py-2 text-[13px] font-medium transition-premium cursor-pointer select-none rounded-lg mx-2 border-none outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/30;
+    color: #64748b; /* Slate 500 */
   }
 
-  .gitlab-sidebar-item:hover {
-    @apply bg-[rgba(255,255,255,0.4)] text-brand-primary;
+  .eng-sidebar-item:hover {
+    @apply bg-slate-200/50 text-brand-primary;
   }
 
-  .gitlab-sidebar-item:active {
-    @apply scale-[0.98];
+  .eng-sidebar-item.active {
+    @apply bg-white text-brand-accent shadow-sm ring-1 ring-slate-200/50;
   }
 
-  .gitlab-sidebar-item.active {
-    @apply bg-white/60 text-brand-primary font-semibold shadow-sm ring-1 ring-white/40;
-    backdrop-filter: blur(8px);
+  .eng-sidebar-item.active::before {
+    content: '';
+    @apply absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-brand-accent rounded-full transition-premium;
   }
 
-  .gitlab-sidebar-item.active svg {
+  .collapsed-item {
+    @apply mx-3 px-0 justify-center h-10 w-10;
+  }
+
+  .sidebar-group-label {
+    @apply px-5 mt-6 mb-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest pointer-events-none;
+  }
+
+  .eng-btn-primary {
+    @apply bg-brand-accent text-white px-4 py-2 text-sm font-semibold rounded-lg hover:bg-brand-accent-hover transition-premium shadow-sm active:scale-[0.97] flex items-center gap-2;
+  }
+
+  .eng-btn-secondary {
+    @apply bg-white text-slate-600 border border-slate-200 px-4 py-2 text-sm font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-premium shadow-sm active:scale-[0.97] flex items-center gap-2;
+  }
+
+  .eng-search-container {
+    @apply flex items-center bg-slate-200/40 rounded-xl border border-slate-200/60 transition-premium h-10 px-4 focus-within:bg-white focus-within:ring-4 focus-within:ring-brand-accent/5 focus-within:border-brand-accent focus-within:shadow-sm;
+  }
+
+  .eng-tab {
+    @apply px-4 py-2.5 text-sm font-semibold border-b-2 border-transparent cursor-pointer transition-premium whitespace-nowrap;
+    color: #64748b;
+  }
+
+  .eng-tab:hover {
     @apply text-brand-accent;
   }
 
-  .gitlab-btn-primary {
-    @apply bg-brand-accent text-white px-4 py-2 text-sm font-semibold rounded-[4px] hover:bg-brand-accent-hover active:scale-[0.97] transition-all duration-150 cursor-pointer shadow-sm;
-  }
-
-  .gitlab-btn-secondary {
-    @apply bg-white text-brand-primary border border-brand-border px-4 py-2 text-sm font-semibold rounded-[4px] hover:bg-gray-50 active:scale-[0.97] transition-all duration-150 cursor-pointer shadow-sm;
-  }
-
-  .gitlab-input {
-    @apply w-full border border-brand-border bg-white px-3 py-1.5 text-sm rounded-[4px] focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent-light transition-all duration-200;
-  }
-
-  .gitlab-tab {
-    @apply px-4 py-3 text-sm font-medium border-b-2 border-transparent cursor-pointer transition-all duration-200 whitespace-nowrap select-none;
-    color: #535158;
-  }
-
-  .gitlab-tab:hover {
-    @apply text-brand-accent;
-    background-color: rgba(45, 90, 39, 0.02);
-  }
-
-  .gitlab-tab:active {
-    @apply scale-95;
-  }
-
-  .gitlab-tab.active {
+  .eng-tab.active {
     @apply border-brand-accent text-brand-accent;
   }
 
-  .gitlab-card {
-    @apply border-b border-brand-border py-4 px-4 hover:bg-[rgba(45,90,39,0.015)] active:bg-[rgba(45,90,39,0.03)] transition-all duration-200 flex flex-col gap-1;
+  .eng-card {
+    @apply bg-white border border-slate-200/60 p-5 rounded-2xl hover:border-brand-accent/30 hover:shadow-lg hover:shadow-slate-200/40 transition-premium flex flex-col gap-1 cursor-pointer relative overflow-hidden;
   }
 
-  .gitlab-avatar-sm {
-    @apply w-8 h-8 rounded-md flex items-center justify-center text-xs font-bold border border-brand-border bg-gray-100 transition-transform group-hover:scale-105;
+  .eng-card::after {
+    content: '';
+    @apply absolute inset-0 bg-linear-to-br from-brand-accent/5 to-transparent opacity-0 transition-opacity duration-500;
   }
 
-  .gitlab-content-box {
-    @apply bg-white rounded-tl-2xl border-t border-l border-brand-border flex-1 overflow-hidden h-full shadow-inner;
+  .eng-card:hover::after {
+    @apply opacity-100;
+  }
+
+  .eng-avatar {
+    @apply w-8 h-8 rounded-lg flex items-center justify-center text-[10px] font-bold border border-slate-200 bg-white text-slate-500 shadow-sm transition-premium;
+  }
+
+  .eng-content-box {
+    @apply bg-white rounded-4xl border border-slate-200/50 flex-1 overflow-hidden h-full shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+  }
+
+  /* Custom Scrollbar for Premium Feel */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-200 rounded-full hover:bg-slate-300 transition-colors;
   }
 }

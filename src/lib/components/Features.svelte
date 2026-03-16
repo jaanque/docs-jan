@@ -18,48 +18,43 @@
   ];
 </script>
 
-<section class="py-32 px-6 relative">
-  <div class="max-w-6xl mx-auto w-full relative">
+<section class="py-20 px-8 relative bg-slate-50/30">
+  <div class="max-w-6xl mx-auto w-full">
     
-    <!-- Smooth BadUI Inspired Header -->
-    <div class="text-center mb-28 space-y-8">
-      <h2 class="text-5xl md:text-6xl font-black text-brand-ink tracking-tight uppercase">Specs & Docs.</h2>
-      <div class="w-24 h-2 bg-brand-accent mx-auto radius-organic-2 confident-stroke"></div>
-      <p class="text-brand-ink/70 font-serif italic max-w-xl mx-auto text-xl leading-relaxed">
-        "Everything you need to maintain a high-quality developer experience, handcrafted."
+    <!-- Centralized Header -->
+    <div class="mb-16 border-l-4 border-brand-accent pl-8 py-2">
+      <h2 class="text-3xl font-black text-slate-900 tracking-tight uppercase leading-none">
+        Technical Capabilities
+      </h2>
+      <p class="text-slate-500 font-bold mt-2 text-sm max-w-lg">
+        "Integrated Documentation Lifecycle Management for modern engineering teams."
       </p>
     </div>
 
-    <!-- Confident Ink Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-14">
+    <!-- Grid Layout -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
       {#each features as feature (feature.title)}
-        <div class="ink-card group">
-          <div class="space-y-12">
-            <!-- Icon with Smooth Ink Style -->
-            <div class="w-16 h-16 bg-brand-accent text-brand-ink rounded-lg flex items-center justify-center border-4 border-brand-ink transition-transform group-hover:-translate-x-1 group-hover:-translate-y-1 confident-stroke radius-organic-3 shadow-sm">
-              <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d={feature.icon} />
-              </svg>
-            </div>
-            
-            <div class="space-y-6">
-              <h3 class="text-3xl font-black text-brand-ink uppercase leading-none">{feature.title}</h3>
-              <p class="text-brand-ink/80 leading-relaxed font-serif italic text-lg opacity-90">
-                {feature.desc}
-              </p>
-            </div>
+        <div class="bg-white border border-brand-border rounded-xl p-8 hover:border-brand-accent/40 hover:shadow-lg transition-all duration-300 flex flex-col items-start gap-6">
+          <!-- Icon Square -->
+          <div class="w-12 h-12 bg-slate-900 text-white rounded-lg flex items-center justify-center shadow-sm">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={feature.icon} />
+            </svg>
+          </div>
+          
+          <div class="space-y-2">
+            <h3 class="text-lg font-black text-slate-900 uppercase tracking-tight leading-none">{feature.title}</h3>
+            <p class="text-slate-500 text-sm font-bold leading-relaxed">
+              {feature.desc}
+            </p>
           </div>
         </div>
       {/each}
     </div>
 
-    <!-- Final Callout -->
-    <div class="mt-36 text-center">
-       <div class="inline-block p-1 bg-brand-ink radius-organic-1 box-shadow-[4px_4px_0px_#fbbf24]">
-          <div class="bg-white px-10 py-4 font-black uppercase tracking-tighter text-sm confident-stroke radius-organic-1">
-             ✨ trusted by 1,200+ engineering teams
-          </div>
-       </div>
+    <!-- Proof of Trust -->
+    <div class="mt-20 border-t border-brand-border pt-8 flex items-center justify-center gap-4 opacity-60 grayscale">
+       <span class="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">Deployed in 1,200+ production clusters</span>
     </div>
   </div>
 </section>
