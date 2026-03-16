@@ -14,8 +14,10 @@
   --font-sans: "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
-  /* Premium Transitions */
-  --transition-premium: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@utility transition-premium {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 @layer base {
@@ -30,21 +32,21 @@
   }
 
   .eng-sidebar-item {
-    @apply relative flex items-center gap-3 px-3 py-2 text-[13px] font-medium transition-premium cursor-pointer select-none rounded-lg mx-2 border-none outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/30;
+    @apply relative flex items-center w-full gap-3 px-5 py-2.5 text-[13px] font-semibold transition-premium cursor-pointer select-none border-none outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/30;
     color: #64748b; /* Slate 500 */
   }
 
   .eng-sidebar-item:hover {
-    @apply bg-slate-200/50 text-brand-primary;
+    @apply text-brand-primary;
   }
 
   .eng-sidebar-item.active {
-    @apply bg-white text-brand-accent shadow-sm ring-1 ring-slate-200/50;
+    @apply text-brand-accent bg-brand-accent/3;
   }
 
   .eng-sidebar-item.active::before {
     content: '';
-    @apply absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-4 bg-brand-accent rounded-full transition-premium;
+    @apply absolute left-0 top-1/4 bottom-1/4 w-1 bg-brand-accent rounded-full transition-premium;
   }
 
   .collapsed-item {
@@ -84,13 +86,32 @@
     @apply bg-white border border-slate-200/60 p-5 rounded-2xl hover:border-brand-accent/30 hover:shadow-lg hover:shadow-slate-200/40 transition-premium flex flex-col gap-1 cursor-pointer relative overflow-hidden;
   }
 
-  .eng-card::after {
-    content: '';
-    @apply absolute inset-0 bg-linear-to-br from-brand-accent/5 to-transparent opacity-0 transition-opacity duration-500;
+  .eng-card:hover {
+    @apply border-brand-accent/30;
   }
 
-  .eng-card:hover::after {
-    @apply opacity-100;
+  .eng-tag {
+    @apply px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider border border-slate-200/60 bg-slate-100/50 text-slate-500 transition-colors;
+  }
+
+  .eng-tag-accent {
+    @apply border-brand-accent/20 bg-brand-accent/5 text-brand-accent;
+  }
+
+  .eng-badge-status {
+    @apply flex items-center gap-1.5 text-[11px] font-bold text-slate-400;
+  }
+
+  .eng-badge-status .dot {
+    @apply w-1.5 h-1.5 rounded-full bg-slate-300;
+  }
+
+  .eng-badge-status.synced .dot {
+    @apply bg-brand-success shadow-[0_0_8px_rgba(16,185,129,0.4)];
+  }
+
+  .eng-badge-status.syncing .dot {
+    @apply bg-brand-accent animate-pulse;
   }
 
   .eng-avatar {
@@ -99,6 +120,10 @@
 
   .eng-content-box {
     @apply bg-white rounded-4xl border border-slate-200/50 flex-1 overflow-hidden h-full shadow-[0_8px_30px_rgb(0,0,0,0.04)];
+  }
+
+  .eng-input {
+    @apply w-full bg-slate-200/40 rounded-xl border border-slate-200/60 px-4 transition-premium outline-none text-slate-900 placeholder-slate-400 font-medium focus:bg-white focus:ring-4 focus:ring-brand-accent/5 focus:border-brand-accent focus:shadow-sm;
   }
 
   /* Custom Scrollbar for Premium Feel */
