@@ -1,3 +1,92 @@
-@import 'tailwindcss';
-@plugin '@tailwindcss/forms';
-@plugin '@tailwindcss/typography';
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #333238;
+  --color-brand-active: #48474d;
+  --color-brand-border: #dbdbdb;
+  --color-brand-bg: #ffffff;
+  --color-brand-accent: #2d5a27; /* Deep Crocodile Green */
+  --color-brand-accent-light: #e9f5e8;
+  --color-brand-accent-hover: #3d7a35;
+  --color-brand-success: #108548;
+  
+  --font-sans: "Inter", "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+@layer base {
+  body {
+    @apply font-sans text-brand-primary antialiased min-h-screen transition-colors duration-300;
+    background-color: #ebebef; 
+  }
+}
+
+@layer utilities {
+  .gitlab-border {
+    border: 1px solid var(--color-brand-border);
+  }
+
+  .gitlab-sidebar-item {
+    @apply flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-all duration-200 cursor-pointer select-none rounded-lg mx-2;
+    color: #6a6a6a;
+  }
+
+  .gitlab-sidebar-item:hover {
+    @apply bg-[rgba(255,255,255,0.4)] text-brand-primary;
+  }
+
+  .gitlab-sidebar-item:active {
+    @apply scale-[0.98];
+  }
+
+  .gitlab-sidebar-item.active {
+    @apply bg-white/60 text-brand-primary font-semibold shadow-sm ring-1 ring-white/40;
+    backdrop-filter: blur(8px);
+  }
+
+  .gitlab-sidebar-item.active svg {
+    @apply text-brand-accent;
+  }
+
+  .gitlab-btn-primary {
+    @apply bg-brand-accent text-white px-4 py-2 text-sm font-semibold rounded-[4px] hover:bg-brand-accent-hover active:scale-[0.97] transition-all duration-150 cursor-pointer shadow-sm;
+  }
+
+  .gitlab-btn-secondary {
+    @apply bg-white text-brand-primary border border-brand-border px-4 py-2 text-sm font-semibold rounded-[4px] hover:bg-gray-50 active:scale-[0.97] transition-all duration-150 cursor-pointer shadow-sm;
+  }
+
+  .gitlab-input {
+    @apply w-full border border-brand-border bg-white px-3 py-1.5 text-sm rounded-[4px] focus:outline-none focus:border-brand-accent focus:ring-2 focus:ring-brand-accent-light transition-all duration-200;
+  }
+
+  .gitlab-tab {
+    @apply px-4 py-3 text-sm font-medium border-b-2 border-transparent cursor-pointer transition-all duration-200 whitespace-nowrap select-none;
+    color: #535158;
+  }
+
+  .gitlab-tab:hover {
+    @apply text-brand-accent;
+    background-color: rgba(45, 90, 39, 0.02);
+  }
+
+  .gitlab-tab:active {
+    @apply scale-95;
+  }
+
+  .gitlab-tab.active {
+    @apply border-brand-accent text-brand-accent;
+  }
+
+  .gitlab-card {
+    @apply border-b border-brand-border py-4 px-4 hover:bg-[rgba(45,90,39,0.015)] active:bg-[rgba(45,90,39,0.03)] transition-all duration-200 flex flex-col gap-1;
+  }
+
+  .gitlab-avatar-sm {
+    @apply w-8 h-8 rounded-md flex items-center justify-center text-xs font-bold border border-brand-border bg-gray-100 transition-transform group-hover:scale-105;
+  }
+
+  .gitlab-content-box {
+    @apply bg-white rounded-tl-2xl border-t border-l border-brand-border flex-1 overflow-hidden h-full shadow-inner;
+  }
+}
