@@ -7,16 +7,18 @@ import type { SidebarNav, HeaderNav } from '$lib/types/navigation';
  */
 export const sidebarNav: SidebarNav = {
   platform: [
-    { label: 'Projects', icon: 'projects', active: true, title: 'Projects View' },
-    { label: 'Analytics', icon: 'analytics', active: false, title: 'Analytics & Reports' }
+    { label: 'Dashboard', icon: 'dashboard', active: true, title: 'Resumen general' },
+    { label: 'Mis Proyectos', icon: 'projects', active: false, title: 'Documentaciones importadas o creadas' },
+    { label: 'Compartido con migo', icon: 'shared', active: false, title: 'Colaboraciones' }
   ],
   activity: [
-    { label: 'History', icon: 'history', active: false, title: 'Recent Documents' },
-    { label: 'Saved', icon: 'bookmarks', active: false, title: 'Bookmarks' }
+    { label: 'Historial', icon: 'history', active: false, title: 'Últimos documentos' },
+    { label: 'Marcadores', icon: 'bookmarks', active: false, title: 'Páginas favoritas' }
   ],
   recents: [
+    { id: 'COD', label: 'codocs-core', color: 'bg-brand-accent/10' },
     { id: 'API', label: 'v2-api-spec', color: 'bg-slate-200' },
-    { id: 'UX', label: 'design-system-core', color: 'bg-slate-200' }
+    { id: 'DS', label: 'design-system', color: 'bg-blue-50' }
   ]
 };
 
