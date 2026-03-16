@@ -9,7 +9,6 @@
   /*                                   IMPORTS                                  */
   /* -------------------------------------------------------------------------- */
   import type { Project } from '$lib/types/project';
-  import SearchFilters from '$lib/components/SearchFilters.svelte';
   import ProjectCard from '$lib/components/ProjectCard.svelte';
 
   /* -------------------------------------------------------------------------- */
@@ -28,9 +27,6 @@
   ==============================================================================
 -->
 <div class="py-10 px-10 flex flex-col w-full">
-
-  <!-- [SECTION] Search & Filter Bar (Dumb component) -->
-  <SearchFilters />
 
   <!-- [SECTION] Premium Project Grid -->
   <!-- We use a responsive grid that adjusts columns based on viewport width (1, 2, or 3 cols) -->
