@@ -108,9 +108,16 @@
     <div class="sidebar-group-label mt-6" class:collapsed={isCollapsed}>
       <span>Recientes</span>
     </div>
-    <div class="space-y-1 mt-1 overflow-hidden" class:px-2={!isCollapsed}>
+    <div class="space-y-1 mt-1" class:px-2={!isCollapsed}>
       {#each sidebarNav.recents as recent (recent.id)}
-        <div class="flex items-center gap-3 px-3 py-2 cursor-pointer group hover:bg-white hover:shadow-sm rounded-xl transition-all duration-500" role="button" tabindex="0" aria-label="Open {recent.label}">
+        <div 
+          class="flex items-center gap-3 py-2 cursor-pointer group hover:bg-white hover:shadow-sm rounded-xl transition-all duration-500" 
+          class:px-3={!isCollapsed}
+          class:justify-center={isCollapsed}
+          role="button" 
+          tabindex="0" 
+          aria-label="Open {recent.label}"
+        >
           <div class="w-6 h-6 shrink-0 rounded-lg {recent.color} border border-slate-200 flex items-center justify-center text-[9px] font-black text-slate-600 group-hover:bg-white transition-colors">{recent.id}</div>
           <span class="sidebar-text-container" class:collapsed={isCollapsed}>
             <span class="text-[13px] text-slate-500 group-hover:text-slate-900 font-bold transition-colors truncate">{recent.label}</span>
@@ -139,7 +146,7 @@
         title={isCollapsed ? "Expand Sidebar (⌘B)" : "Collapse Sidebar (⌘B)"}
         aria-label={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
       >
-        <svg class="w-4.5 h-4.5 transition-transform duration-500" class:rotate-180={isCollapsed} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <svg class="w-4.5 h-4.5 shrink-0 transition-transform duration-500" class:rotate-180={isCollapsed} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
         </svg>
         <span class="sidebar-text-container" class:collapsed={isCollapsed}>

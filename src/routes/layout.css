@@ -68,15 +68,16 @@
 
   .eng-sidebar-item.active::before {
     content: '';
-    @apply absolute top-1/4 bottom-1/4 left-0 w-1 rounded-full bg-brand-accent transition-all duration-500;
+    @apply absolute top-2.5 bottom-2.5 left-0 w-1.5 rounded-r-full bg-brand-accent transition-all duration-500;
   }
 
+  /* Position indicator further left in collapsed state to give the icon breathing room */
   .eng-sidebar-item.collapsed-item.active::before {
-    @apply left-2;
+    @apply -left-3 w-1 rounded-full;
   }
 
   .collapsed-item {
-    @apply h-11 w-11 justify-center px-0 mx-auto;
+    @apply h-11 w-11 justify-center px-0 mx-auto relative;
   }
 
   .sidebar-group-label {
@@ -85,15 +86,24 @@
 
   .sidebar-group-label::after {
     content: '';
-    @apply h-px flex-1 bg-slate-300/60 transition-all duration-500 min-w-[20px];
+    @apply h-px flex-1 bg-slate-300/60 transition-all duration-500 min-w-[12px];
+  }
+
+  .sidebar-group-label::before {
+    content: '';
+    @apply h-px transition-all duration-500;
   }
 
   .sidebar-group-label.collapsed {
-    @apply px-4 justify-center;
+    @apply px-0 justify-center;
   }
   
+  .sidebar-group-label.collapsed::before {
+    @apply w-4 flex-1 bg-slate-200/60; /* Add line on both sides when collapsed for symmetry */
+  }
+
   .sidebar-group-label.collapsed span {
-    @apply w-0 opacity-0 mr-0;
+    @apply w-0 opacity-0 m-0;
   }
 
   .sidebar-group-label span {
