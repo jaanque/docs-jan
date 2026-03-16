@@ -65,8 +65,14 @@
     <div class="sidebar-group-label" class:hidden={isCollapsed}>Platform</div>
     <div class="space-y-0.5">
       {#each sidebarNav.platform as item (item.label)}
-        <button class="eng-sidebar-item group" class:active={item.active} class:collapsed-item={isCollapsed} title={item.title}>
-          <svg class="w-4.5 h-4.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <button 
+          class="eng-sidebar-item group" 
+          class:active={item.active} 
+          class:collapsed-item={isCollapsed} 
+          title={item.title}
+          aria-label={item.label}
+        >
+          <svg class="w-4.5 h-4.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons[item.icon]} />
             {#if item.icon === 'settings'}<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />{/if}
           </svg>
@@ -79,8 +85,16 @@
     <div class="sidebar-group-label" class:hidden={isCollapsed}>Activity</div>
     <div class="space-y-1 mt-1">
       {#each sidebarNav.activity as item (item.label)}
-        <button class="eng-sidebar-item group" class:active={item.active} class:collapsed-item={isCollapsed} title={item.title}>
-          <svg class="w-4.5 h-4.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons[item.icon]} /></svg>
+        <button 
+          class="eng-sidebar-item group" 
+          class:active={item.active} 
+          class:collapsed-item={isCollapsed} 
+          title={item.title}
+          aria-label={item.label}
+        >
+          <svg class="w-4.5 h-4.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons[item.icon]} />
+          </svg>
           {#if !isCollapsed}<span>{item.label}</span>{/if}
         </button>
       {/each}
@@ -91,7 +105,7 @@
       <div class="sidebar-group-label">Recents</div>
       <div class="px-5 space-y-3 mt-1">
         {#each sidebarNav.recents as recent (recent.id)}
-          <div class="flex items-center gap-3 cursor-pointer group">
+          <div class="flex items-center gap-3 cursor-pointer group" role="button" tabindex="0" aria-label="Open {recent.label}">
             <div class="w-6 h-6 rounded {recent.color} border border-slate-300/50 flex items-center justify-center text-[8px] font-bold text-slate-600">{recent.id}</div>
             <span class="text-[12px] text-slate-500 group-hover:text-brand-primary transition-colors truncate">{recent.label}</span>
           </div>
@@ -103,8 +117,8 @@
   <!-- [SECTION] Sidebar Footer -->
   <div class="p-4 border-t border-slate-200/60">
     <div class="flex flex-col gap-1">
-      <button class="eng-sidebar-item group" class:collapsed-item={isCollapsed} title="Settings">
-        <svg class="w-4.5 h-4.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <button class="eng-sidebar-item group" class:collapsed-item={isCollapsed} title="Settings" aria-label="Settings">
+        <svg class="w-4.5 h-4.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={icons.settings} />
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
         </svg>
@@ -117,8 +131,11 @@
         class="eng-sidebar-item group" 
         class:collapsed-item={isCollapsed}
         title={isCollapsed ? "Expand Sidebar (⌘B)" : "Collapse Sidebar (⌘B)"}
+        aria-label={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
       >
-        <svg class="w-4.5 h-4.5 transition-transform duration-500" class:rotate-180={isCollapsed} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" /></svg>
+        <svg class="w-4.5 h-4.5 transition-transform duration-500" class:rotate-180={isCollapsed} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7" />
+        </svg>
         {#if !isCollapsed}<span>Minimize</span>{/if}
       </button>
     </div>

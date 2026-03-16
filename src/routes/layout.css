@@ -65,7 +65,7 @@
     @apply bg-white text-slate-600 border border-slate-200 px-4 py-2 text-sm font-semibold rounded-lg hover:bg-slate-50 hover:border-slate-300 transition-premium shadow-sm active:scale-[0.97] flex items-center gap-2;
   }
 
-  .eng-search-container {
+  .eng-search-center-container {
     @apply flex items-center bg-slate-200/40 rounded-xl border border-slate-200/60 transition-premium h-10 px-4 focus-within:bg-white focus-within:ring-4 focus-within:ring-brand-accent/5 focus-within:border-brand-accent focus-within:shadow-sm;
   }
 
