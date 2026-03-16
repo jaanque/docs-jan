@@ -8,6 +8,9 @@
   /*                                   IMPORTS                                  */
   /* -------------------------------------------------------------------------- */
   import { headerNav } from '$lib/mockData/navigation';
+  import { resolve } from '$app/paths';
+  import { user } from '$lib/authStore';
+  import UserMenu from '$lib/components/UserMenu.svelte';
 </script>
 
 <!-- 
@@ -71,12 +74,16 @@
     <div class="h-6 w-[1.5px] bg-slate-300/80 mx-8"></div>
 
     <div class="flex items-center gap-6 shrink-0 pr-2">
-      <button class="text-[13px] font-bold text-slate-500 hover:text-brand-primary transition-colors whitespace-nowrap" aria-label="Iniciar sesión">
-        Iniciar sesión
-      </button>
-      <button class="eng-btn-primary h-9 px-6 whitespace-nowrap" aria-label="Crear cuenta">
-        Crear cuenta
-      </button>
+      {#if $user}
+        <UserMenu />
+      {:else}
+        <a href={resolve('/auth/login')} class="text-[13px] font-bold text-slate-500 hover:text-brand-primary transition-colors whitespace-nowrap no-underline" aria-label="Iniciar sesión">
+          Iniciar sesión
+        </a>
+        <a href={resolve('/auth/register')} class="eng-btn-primary h-9 px-6 whitespace-nowrap no-underline" aria-label="Crear cuenta">
+          Crear cuenta
+        </a>
+      {/if}
     </div>
   </div>
 </header>

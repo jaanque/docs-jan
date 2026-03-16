@@ -3,9 +3,26 @@
   import favicon from '$lib/assets/favicon.svg';
   import Sidebar from '$lib/components/Sidebar.svelte';
   import Header from '$lib/components/Header.svelte';
+  import { onMount } from 'svelte';
+  import { supabase } from '$lib/supabaseClient';
+  import { user } from '$lib/authStore';
 
   let { children } = $props();
   let isCollapsed = $state(false);
+
+  onMount(() => {
+    // Check initial session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      user.set(session?.user ?? null);
+    });
+
+    // Listen for changes
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      user.set(session?.user ?? null);
+    });
+
+    return () => subscription.unsubscribe();
+  });
 </script>
 
 <svelte:head>

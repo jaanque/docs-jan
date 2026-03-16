@@ -1,18 +1,12 @@
-<!-- 
-  @component Sidebar
-  @description The main navigation sidebar. 
-  Uses a "Dumb" presentational pattern, receiving its state and data as props.
--->
-
 <script lang="ts">
   /* -------------------------------------------------------------------------- */
-  /*                                   IMPORTS                                  */
+  /* IMPORTS                                  */
   /* -------------------------------------------------------------------------- */
   import { sidebarNav } from '$lib/mockData/navigation';
-  import { base } from '$app/paths';
+  import { resolve } from '$app/paths';
   
   /* -------------------------------------------------------------------------- */
-  /*                                    PROPS                                   */
+  /* PROPS                                   */
   /* -------------------------------------------------------------------------- */
   /**
    * controls whether the sidebar is in its compact or expanded state.
@@ -21,7 +15,7 @@
   let { isCollapsed = $bindable(false) } = $props<{ isCollapsed: boolean }>();
 
   /* -------------------------------------------------------------------------- */
-  /*                                    LOGIC                                   */
+  /* LOGIC                                   */
   /* -------------------------------------------------------------------------- */
   /**
    * Map icon names from mock data to specific SVG path data.
@@ -37,19 +31,13 @@
   };
 </script>
 
-<!-- 
-  ==============================================================================
-                                  SIDEBAR LAYOUT
-  ==============================================================================
--->
 <aside 
   class="shrink-0 hidden lg:flex flex-col bg-slate-100 transition-premium h-full"
   class:w-64={!isCollapsed}
   class:w-20={isCollapsed}
 >
-  <!-- [SECTION] Logo Area -->
   <div class="h-16 flex items-center px-5 shrink-0">
-    <a href={base || '/'} class="group flex items-center gap-3 outline-none no-underline">
+    <a href={resolve('/')} class="group flex items-center gap-3 outline-none no-underline">
       <div class="flex items-center justify-center shrink-0">
         <div 
           class="w-10 h-10 eng-logo-mask group-hover:bg-brand-accent group-hover:scale-110" 
@@ -67,9 +55,7 @@
     </a>
   </div>
 
-  <!-- [SECTION] Scrollable Navigation -->
   <nav class="flex-1 overflow-y-auto custom-scrollbar py-4">
-    <!-- platform: Main application views -->
     <div class="sidebar-group-label" class:hidden={isCollapsed}>Platform</div>
     <div class="space-y-0.5">
       {#each sidebarNav.platform as item (item.label)}
@@ -89,7 +75,6 @@
       {/each}
     </div>
 
-    <!-- activity: Recent user interaction points -->
     <div class="sidebar-group-label" class:hidden={isCollapsed}>Activity</div>
     <div class="space-y-1 mt-1">
       {#each sidebarNav.activity as item (item.label)}
@@ -108,7 +93,6 @@
       {/each}
     </div>
 
-    <!-- recents: Quick access to recently opened documents -->
     {#if !isCollapsed}
       <div class="sidebar-group-label">Recents</div>
       <div class="px-5 space-y-3 mt-1">
@@ -122,7 +106,6 @@
     {/if}
   </nav>
   
-  <!-- [SECTION] Sidebar Footer -->
   <div class="p-4 border-t border-slate-200/60">
     <div class="flex flex-col gap-1">
       <button class="eng-sidebar-item group" class:collapsed-item={isCollapsed} title="Settings" aria-label="Settings">
@@ -133,7 +116,6 @@
         {#if !isCollapsed}<span>Settings</span>{/if}
       </button>
       
-      <!-- Collapse toggle: Affects global layout via $bindable prop -->
       <button 
         onclick={() => isCollapsed = !isCollapsed}
         class="eng-sidebar-item group" 
