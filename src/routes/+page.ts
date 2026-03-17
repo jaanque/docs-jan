@@ -1,12 +1,28 @@
-import { mockProjects } from '$lib/mockData/projects';
+import { supabase } from '$lib/supabaseClient';
 
 /**
  * SvelteKit load function.
- * Moves data fetching logic out of the component layer and into the routing layer.
- * Using automatic type inference instead of manual 'PageLoad' for better precision.
+ * Fetches real projects from Supabase for the authenticated user.
  */
-export const load = () => {
+export const load = async () => {
+  const { data: { session } } = await supabase.auth.getSession();
+  
+  if (!session) {
+    return {
+      projects: []
+    };
+  }
+
+  const { data: projects, error } = await supabase
+    .from('projects')
+    .select('*')
+    .order('last_accessed_at', { ascending: false });
+
+  if (error) {
+    return { projects: [] };
+  }
+
   return {
-    projects: mockProjects
+    projects: projects || []
   };
 };

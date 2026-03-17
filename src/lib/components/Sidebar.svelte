@@ -4,6 +4,16 @@
   /* -------------------------------------------------------------------------- */
   import { sidebarNav } from '$lib/mockData/navigation';
   import { resolve } from '$app/paths';
+  import { supabase } from '$lib/supabaseClient';
+  import { onMount } from 'svelte';
+  import type { Project } from '$lib/types/project';
+  
+  /* -------------------------------------------------------------------------- */
+  /* STATE                                    */
+  /* -------------------------------------------------------------------------- */
+  /* STATE                                    */
+  /* -------------------------------------------------------------------------- */
+  let recentProjects = $state<Project[]>([]);
   
   /* -------------------------------------------------------------------------- */
   /* PROPS                                   */
@@ -30,6 +40,21 @@
     bookmarks: 'M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z',
     settings: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924-1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z'
   };
+
+  onMount(async () => {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (session) {
+      const { data } = await supabase
+        .from('projects')
+        .select('*')
+        .order('last_accessed_at', { ascending: false })
+        .limit(5);
+      
+      if (data) {
+        recentProjects = data;
+      }
+    }
+  });
 </script>
 
 <aside 
@@ -109,18 +134,18 @@
       <span>Recientes</span>
     </div>
     <div class="space-y-1 mt-1" class:px-2={!isCollapsed}>
-      {#each sidebarNav.recents as recent (recent.id)}
+      {#each recentProjects as project (project.id)}
         <div 
           class="flex items-center gap-3 py-2 cursor-pointer group hover:bg-white hover:shadow-sm rounded-xl transition-all duration-500" 
           class:px-3={!isCollapsed}
           class:justify-center={isCollapsed}
           role="button" 
           tabindex="0" 
-          aria-label="Open {recent.label}"
+          aria-label="Open {project.name}"
         >
-          <div class="w-6 h-6 shrink-0 rounded-lg {recent.color} border border-slate-200 flex items-center justify-center text-[9px] font-black text-slate-600 group-hover:bg-white transition-colors">{recent.id}</div>
+          <div class="w-6 h-6 shrink-0 rounded-lg {project.color} border border-slate-200 flex items-center justify-center text-[9px] font-black text-slate-600 group-hover:bg-white transition-colors">{project.short_id}</div>
           <span class="sidebar-text-container" class:collapsed={isCollapsed}>
-            <span class="text-[13px] text-slate-500 group-hover:text-slate-900 font-bold transition-colors truncate">{recent.label}</span>
+            <span class="text-[13px] text-slate-500 group-hover:text-slate-900 font-bold transition-colors truncate">{project.name}</span>
           </span>
         </div>
       {/each}

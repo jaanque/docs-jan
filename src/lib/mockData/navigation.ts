@@ -15,11 +15,7 @@ export const sidebarNav: SidebarNav = {
     { label: 'Historial', icon: 'history', active: false, title: 'Últimos documentos' },
     { label: 'Marcadores', icon: 'bookmarks', active: false, title: 'Páginas favoritas' }
   ],
-  recents: [
-    { id: 'COD', label: 'codocs-core', color: 'bg-brand-accent/10' },
-    { id: 'API', label: 'v2-api-spec', color: 'bg-slate-200' },
-    { id: 'DS', label: 'design-system', color: 'bg-blue-50' }
-  ]
+  recents: []
 };
 
 /**
