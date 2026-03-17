@@ -10,10 +10,16 @@
   import { headerNav } from '$lib/mockData/navigation';
   import { resolve } from '$app/paths';
   import { user } from '$lib/authStore';
+  import { page } from '$app/state';
   import UserMenu from '$lib/components/UserMenu.svelte';
   import NewProjectModal from '$lib/components/NewProjectModal.svelte';
 
   let isModalOpen = $state(false);
+
+  // Dynamic breadcrumb logic
+  const isProjectPage = $derived(page.route.id === '/[owner]/[repo]');
+  const project = $derived(page.data.project);
+  const projectName = $derived(project?.name?.split('/')[1] || '');
 </script>
 
 <!-- 
@@ -21,20 +27,40 @@
                                   HEADER LAYOUT
   ==============================================================================
 -->
-<header class="h-16 flex items-center px-6 shrink-0 bg-slate-100 z-50 transition-premium border-b border-slate-200/50">
+<header class="h-16 flex items-center px-8 shrink-0 bg-slate-100 z-50 transition-premium border-b border-slate-200/50">
   
   <!-- [SECTION] Left: Navigation / Breadcrumbs -->
-  <div class="flex-1 flex items-center gap-4">
-    <div class="flex items-center gap-3 text-[13px] font-semibold text-slate-500">
-      <div class="flex items-center gap-2">
-        {#each headerNav.breadcrumbs as crumb, i (crumb.label)}
-          <span class="hover:text-brand-primary cursor-pointer transition-colors" class:text-brand-primary={crumb.active}>{crumb.label}</span>
-          {#if i < headerNav.breadcrumbs.length - 1}
-            <svg class="w-3 h-3 opacity-30" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-            </svg>
-          {/if}
-        {/each}
+  <div class="flex-1 flex items-center gap-6">
+    <div class="flex items-center gap-4 text-[13px] font-semibold">
+      <div class="flex items-center gap-3">
+        <a 
+          href={resolve('/')} 
+          class="flex items-center gap-2 text-slate-400 hover:text-brand-primary transition-all no-underline uppercase tracking-[0.2em] text-[10px] font-black" 
+          class:text-brand-primary={!isProjectPage}
+        >
+          PROJECTS
+        </a>
+        
+        {#if isProjectPage && project}
+          <div class="flex items-center gap-5">
+            <div class="h-4 w-px bg-slate-200 ml-1"></div>
+            
+            <div class="flex items-center gap-3 transition-premium group cursor-default">
+              <!-- Frameless Mini Logo -->
+              <div class="w-7 h-7 flex items-center justify-center shrink-0 relative group">
+                {#if project.logo_url}
+                  <img src={project.logo_url} alt="" class="w-full h-full object-contain filter drop-shadow-xs rounded-md" />
+                {:else}
+                  <div class="w-full h-full flex items-center justify-center {project.color || 'bg-slate-100'} text-slate-600 font-black text-[9px] uppercase rounded-md tracking-tighter">
+                    {project.short_id}
+                  </div>
+                {/if}
+              </div>
+              
+              <span class="text-slate-900 font-black tracking-tightest text-[13px]">{projectName}</span>
+            </div>
+          </div>
+        {/if}
       </div>
     </div>
   </div>
@@ -49,7 +75,7 @@
         type="text" 
         placeholder={headerNav.search.placeholder} 
         class="w-full bg-transparent pl-3 pr-8 text-sm text-slate-900 placeholder-slate-400 font-medium outline-none h-full" 
-        aria-label="Search documentation"
+        aria-label="Search"
       />
       <!-- Shortcut hint -->
       <div class="flex items-center gap-1 opacity-20 group-focus-within:opacity-40 transition-opacity" aria-hidden="true">

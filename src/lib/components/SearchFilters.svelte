@@ -7,7 +7,7 @@
     </div>
     <input 
       type="text" 
-      placeholder="Jump to repository or documentation module..." 
+      placeholder="Jump to repository or module..." 
       class="eng-input pl-12 h-12 text-base" 
       aria-label="Filter repositories or modules"
     />
@@ -20,7 +20,7 @@
     >
       <option>Last synchronized</option>
       <option>Star count (High to Low)</option>
-      <option>Documentation coverage</option>
+      <option>Repository health</option>
     </select>
     <button class="eng-btn-secondary px-4 aspect-square flex items-center justify-center p-0! h-12 shadow-sm" title="Advanced Filters" aria-label="Open Advanced Filters">
       <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" focusable="false">

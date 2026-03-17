@@ -2,17 +2,9 @@ import { supabase } from '$lib/supabaseClient';
 
 /**
  * SvelteKit load function.
- * Fetches real projects from Supabase for the authenticated user.
+ * Fetches real projects from Supabase regardless of authentication.
  */
 export const load = async () => {
-  const { data: { session } } = await supabase.auth.getSession();
-  
-  if (!session) {
-    return {
-      projects: []
-    };
-  }
-
   const { data: projects, error } = await supabase
     .from('projects')
     .select('*')

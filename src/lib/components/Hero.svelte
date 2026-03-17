@@ -31,15 +31,19 @@
   <!-- [SECTION] Premium Project Grid -->
   <!-- We use a responsive grid that adjusts columns based on viewport width (1, 2, or 3 cols) -->
   <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8">
-    {#if loading || (projects.length === 0)}
-      <!-- Show 6 skeletons while loading or if it's the very first load -->
+    {#if loading}
+      <!-- Show 6 skeletons ONLY while explicitly loading -->
       {#each Array(6) as _, i (i)}
         <ProjectCard loading={true} />
       {/each}
-    {:else}
+    {:else if projects.length > 0}
       {#each projects as project (project.id)}
         <ProjectCard {project} />
       {/each}
+    {:else}
+      <div class="col-span-full py-20 text-center opacity-50 font-medium">
+        No se encontraron proyectos públicos.
+      </div>
     {/if}
   </div>
 </div>

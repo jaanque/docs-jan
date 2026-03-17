@@ -156,6 +156,10 @@
     @apply border-brand-accent/20 bg-brand-accent/5 text-brand-accent;
   }
 
+  .eng-tag-outline {
+    @apply border border-slate-200 bg-transparent text-slate-500;
+  }
+
   .eng-badge-status {
     @apply flex items-center gap-1.5 text-[11px] font-bold text-slate-400;
   }
@@ -177,7 +181,7 @@
   }
 
   .eng-content-box {
-    @apply h-full flex-1 overflow-hidden rounded-2xl border border-slate-100 bg-white;
+    @apply h-full flex-1 overflow-hidden lg:rounded-2xl border-none lg:border border-slate-100 bg-white;
   }
 
   .eng-input {

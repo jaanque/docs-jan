@@ -6,9 +6,17 @@
   import { onMount } from 'svelte';
   import { supabase } from '$lib/supabaseClient';
   import { user } from '$lib/authStore';
+  import { afterNavigate } from '$app/navigation';
 
   let { children } = $props();
   let isCollapsed = $state(false);
+
+  afterNavigate(({ to }) => {
+    // Automatically collapse sidebar when navigating to a project details page
+    if (to?.route?.id === '/[owner]/[repo]') {
+      isCollapsed = true;
+    }
+  });
 
   onMount(() => {
     // Check initial session
@@ -27,7 +35,7 @@
 
 <svelte:head>
   <title>codocs | Refined Engineering</title>
-  <meta name="description" content="Instant engineering documentation browser." />
+  <meta name="description" content="Instant engineering browser." />
   <link rel="icon" href={favicon} />
 </svelte:head>
 
