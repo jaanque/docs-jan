@@ -4,6 +4,7 @@
   /* -------------------------------------------------------------------------- */
   import type { Project } from '$lib/types/project';
   import Skeleton from './ui/Skeleton.svelte';
+  import { resolve } from '$app/paths';
   
   /* -------------------------------------------------------------------------- */
   /*                                    PROPS                                   */
@@ -112,10 +113,12 @@
     </div>
   </div>
 {:else}
-  <div 
-    class="eng-card group"
-    role="button"
-    tabindex="0"
+  <a 
+    href={resolve('/[owner]/[repo]', { 
+      owner: project.name!.split('/')[0], 
+      repo: project.name!.split('/')[1] 
+    })}
+    class="eng-card group block text-left no-underline"
     onmouseenter={() => isHovered = true}
     onmouseleave={() => isHovered = false}
     style:background-color={isHovered ? accentColor : 'white'}
@@ -178,5 +181,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </a>
 {/if}

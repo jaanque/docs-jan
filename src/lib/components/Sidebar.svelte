@@ -149,18 +149,23 @@
         {:else if recentProjects.length > 0}
           {#each recentProjects as project (project.id)}
             <a 
-              href={resolve(`/projects/${encodeURIComponent(project.name.toLowerCase().replace(' / ', '-'))}` as Parameters<typeof resolve>[0])}
+              href={resolve('/[owner]/[repo]', { 
+                owner: project.name.split('/')[0], 
+                repo: project.name.split('/')[1] 
+              })}
               class="eng-sidebar-item group/item"
               class:collapsed-item={isCollapsed}
             >
               <!-- Project Logo / Letter -->
               <div 
-                class="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-[10px] font-bold text-slate-500 transition-premium group-hover/item:border-brand-accent/30 group-hover/item:bg-brand-accent/5 group-hover/item:text-brand-accent shadow-sm overflow-hidden"
+                class="flex h-8 w-8 shrink-0 items-center justify-center relative transition-transform duration-500 group-hover/item:scale-110"
               >
                 {#if project.logo_url}
-                  <img src={project.logo_url} alt={project.name} class="w-full h-full object-cover" />
+                  <img src={project.logo_url} alt={project.name} class="w-full h-full object-cover rounded-lg" />
                 {:else}
-                  {project.short_id}
+                  <div class="w-full h-full flex items-center justify-center {project.color || 'bg-slate-100'} text-slate-600 font-bold text-[9px] rounded-lg uppercase tracking-tighter">
+                    {project.short_id}
+                  </div>
                 {/if}
               </div>
               
