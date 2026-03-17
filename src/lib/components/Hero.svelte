@@ -18,7 +18,7 @@
    * List of projects to display.
    * Provided by the parent "Smart" route (+page.svelte).
    */
-  let { projects = [] } = $props<{ projects?: Project[] }>();
+  let { projects = [], loading = false } = $props<{ projects?: Project[], loading?: boolean }>();
 </script>
 
 <!-- 
@@ -31,8 +31,15 @@
   <!-- [SECTION] Premium Project Grid -->
   <!-- We use a responsive grid that adjusts columns based on viewport width (1, 2, or 3 cols) -->
   <div class="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-8">
-    {#each projects as project (project.name)}
-      <ProjectCard {project} />
-    {/each}
+    {#if loading || (projects.length === 0)}
+      <!-- Show 6 skeletons while loading or if it's the very first load -->
+      {#each Array(6) as _, i (i)}
+        <ProjectCard loading={true} />
+      {/each}
+    {:else}
+      {#each projects as project (project.id)}
+        <ProjectCard {project} />
+      {/each}
+    {/if}
   </div>
 </div>

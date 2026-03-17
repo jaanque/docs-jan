@@ -7,6 +7,7 @@
   import { supabase } from '$lib/supabaseClient';
   import { onMount } from 'svelte';
   import type { Project } from '$lib/types/project';
+  import Skeleton from './ui/Skeleton.svelte';
   
   /* -------------------------------------------------------------------------- */
   /* STATE                                    */
@@ -14,6 +15,7 @@
   /* STATE                                    */
   /* -------------------------------------------------------------------------- */
   let recentProjects = $state<Project[]>([]);
+  let isLoading = $state(true);
   
   /* -------------------------------------------------------------------------- */
   /* PROPS                                   */
@@ -54,6 +56,8 @@
         recentProjects = data;
       }
     }
+    
+    isLoading = false;
   });
 </script>
 
@@ -133,22 +137,46 @@
     <div class="sidebar-group-label mt-6" class:collapsed={isCollapsed}>
       <span>Recientes</span>
     </div>
-    <div class="space-y-1 mt-1" class:px-2={!isCollapsed}>
-      {#each recentProjects as project (project.id)}
-        <div 
-          class="flex items-center gap-3 py-2 cursor-pointer group hover:bg-white hover:shadow-sm rounded-xl transition-all duration-500" 
-          class:px-3={!isCollapsed}
-          class:justify-center={isCollapsed}
-          role="button" 
-          tabindex="0" 
-          aria-label="Open {project.name}"
-        >
-          <div class="w-6 h-6 shrink-0 rounded-lg {project.color} border border-slate-200 flex items-center justify-center text-[9px] font-black text-slate-600 group-hover:bg-white transition-colors">{project.short_id}</div>
-          <span class="sidebar-text-container" class:collapsed={isCollapsed}>
-            <span class="text-[13px] text-slate-500 group-hover:text-slate-900 font-bold transition-colors truncate">{project.name}</span>
-          </span>
-        </div>
-      {/each}
+    <div class="space-y-1 mt-1">
+        {#if isLoading}
+          <!-- Skeleton Loading State for Recents -->
+          {#each Array(5) as _, i (i)}
+            <div class="flex items-center gap-3 px-5 py-2.5">
+              <Skeleton width="w-8" height="h-8" rounded="rounded-lg" />
+              <Skeleton width="w-24" height="h-3" rounded="rounded-full" />
+            </div>
+          {/each}
+        {:else if recentProjects.length > 0}
+          {#each recentProjects as project (project.id)}
+            <a 
+              href={resolve(`/projects/${encodeURIComponent(project.name.toLowerCase().replace(' / ', '-'))}` as Parameters<typeof resolve>[0])}
+              class="eng-sidebar-item group/item"
+              class:collapsed-item={isCollapsed}
+            >
+              <!-- Project Logo / Letter -->
+              <div 
+                class="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-[10px] font-bold text-slate-500 transition-premium group-hover/item:border-brand-accent/30 group-hover/item:bg-brand-accent/5 group-hover/item:text-brand-accent shadow-sm overflow-hidden"
+              >
+                {#if project.logo_url}
+                  <img src={project.logo_url} alt={project.name} class="w-full h-full object-cover" />
+                {:else}
+                  {project.short_id}
+                {/if}
+              </div>
+              
+              <!-- Project Name -->
+              <div class="sidebar-text-container" class:collapsed={isCollapsed}>
+                <span class="truncate font-semibold text-slate-600 transition-colors group-hover/item:text-brand-primary">
+                  {project.name.split(' / ')[1] || project.name}
+                </span>
+              </div>
+            </a>
+          {/each}
+        {:else}
+          <div class="px-5 py-4 text-center" class:hidden={isCollapsed}>
+            <p class="text-[11px] font-medium text-slate-400">No hay proyectos recientes</p>
+          </div>
+        {/if}
     </div>
   </nav>
   
